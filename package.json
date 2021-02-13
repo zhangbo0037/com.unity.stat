@@ -1,0 +1,7 @@
+{
+  "name": "com.unity.stat",
+  "displayName": "Stat",
+  "version": "0.1.0",
+  "description": "Display stats directly in mobile device.",
+  "dependencies": {}
+}

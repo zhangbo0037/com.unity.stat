@@ -1,0 +1,15 @@
+{
+    "name": "Unity.Stat.Editor",
+    "references": [
+        "GUID:00e9e8683afd840ef86607520d7e4ee7"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
