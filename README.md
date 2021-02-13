@@ -10,4 +10,4 @@ Using this package can display stats directly in test mobile.
 
 ## Others
 
-E-mail: bo.zhang@unity3d.com
+E-mail:
