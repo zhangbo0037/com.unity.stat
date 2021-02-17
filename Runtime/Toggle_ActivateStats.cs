@@ -10,7 +10,9 @@ public class Toggle_ActivateStats : MonoBehaviour
     public GameObject panelPerformance;
     public GameObject panelMemory;
 
-    //private GameObject canvasStats;
+    //private static GameObject canvasStats;
+
+    //Object[] objs;
 
     void Awake()
     {
@@ -20,12 +22,13 @@ public class Toggle_ActivateStats : MonoBehaviour
             Application.targetFrameRate = 120;
         }
 
-        // Load asset
-        LoadAssetCanvas();
 
+    }
+
+    void OnEnable()
+    {
         // Initialization
         buttonReturn.SetActive(false);
-
         panelMainMenu.SetActive(false);
         panelPerformance.SetActive(false);
         panelMemory.SetActive(false);
@@ -46,12 +49,5 @@ public class Toggle_ActivateStats : MonoBehaviour
         }
     }
 
-    static void LoadAssetCanvas()
-    {
-        // https://docs.unity3d.com/ScriptReference/AssetDatabase.LoadAssetAtPath.html
 
-        //Resources.Load("Packages/com.unity.stat/Runtime/Prefabs/Canvas_Stats.prefab") as GameObject;
-        //Instantiate(Resources.Load("Packages/com.unity.stat/Runtime/Prefabs/Canvas_Stats.prefab")) as GameObject;
-        //var canvasStats = (GameObject)AssetDatabase.LoadAssetAtPath("Packages/com.unity.stat/Runtime/Prefabs/Canvas_Stats.prefab", typeof(GameObject));
-    }
 }
