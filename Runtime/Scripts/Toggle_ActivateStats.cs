@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class ActivateStats : MonoBehaviour
+public class Toggle_ActivateStats : MonoBehaviour
 {
+    public GameObject buttonReturn;
     public GameObject panelMainMenu;
     public GameObject panelPerformance;
     public GameObject panelMemory;
-    public GameObject buttonReturn;
+
+    //private GameObject canvasStats;
 
     void Awake()
     {
@@ -17,11 +20,15 @@ public class ActivateStats : MonoBehaviour
             Application.targetFrameRate = 120;
         }
 
+        // Load asset
+        LoadAssetCanvas();
+
         // Initialization
+        buttonReturn.SetActive(false);
+
         panelMainMenu.SetActive(false);
         panelPerformance.SetActive(false);
         panelMemory.SetActive(false);
-        buttonReturn.SetActive(false);
     }
 
     public void OnTriggerEnter_ActivateStats(bool activated)
@@ -39,4 +46,12 @@ public class ActivateStats : MonoBehaviour
         }
     }
 
+    static void LoadAssetCanvas()
+    {
+        // https://docs.unity3d.com/ScriptReference/AssetDatabase.LoadAssetAtPath.html
+
+        //Resources.Load("Packages/com.unity.stat/Runtime/Prefabs/Canvas_Stats.prefab") as GameObject;
+        //Instantiate(Resources.Load("Packages/com.unity.stat/Runtime/Prefabs/Canvas_Stats.prefab")) as GameObject;
+        //var canvasStats = (GameObject)AssetDatabase.LoadAssetAtPath("Packages/com.unity.stat/Runtime/Prefabs/Canvas_Stats.prefab", typeof(GameObject));
+    }
 }
