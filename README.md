@@ -12,8 +12,9 @@ Unity version: 2019.4.19f1
 
 ## After Installing
 For now, you can check the "performance" and "memory" as below shown. 
-
-
+![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/Menu.png?raw=true "Performance")
+![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/Performance.png?raw=true "Performance")
+![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/Memory.png?raw=true "Memory")
 
 ## Notices
 The first commit date of this repository is 02/11/2020.
