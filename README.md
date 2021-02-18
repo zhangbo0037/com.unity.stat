@@ -11,7 +11,7 @@ Unity version: 2019.4.19f1
 3. Paste "https://github.com/zhangbo0037/com.unity.stat.git" and Click Add button.
 
 ## After Installing
-For now, you can check the "performance" and "memory" as below shown. 
+For now, you can check the "performance" and "memory" as below shown.
 ![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/Menu_.png?raw=true "Performance")
 ![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/Performance_.png?raw=true "Performance")
 ![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/Memory.png_?raw=true "Memory")
