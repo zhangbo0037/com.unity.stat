@@ -10,10 +10,6 @@ public class Toggle_ActivateStats : MonoBehaviour
     public GameObject panelPerformance;
     public GameObject panelMemory;
 
-    //private static GameObject canvasStats;
-
-    //Object[] objs;
-
     void Awake()
     {
         if (Application.isMobilePlatform)
@@ -21,8 +17,6 @@ public class Toggle_ActivateStats : MonoBehaviour
             //QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 120;
         }
-
-
     }
 
     void OnEnable()
@@ -48,6 +42,4 @@ public class Toggle_ActivateStats : MonoBehaviour
             buttonReturn.SetActive(false);
         }
     }
-
-
 }
