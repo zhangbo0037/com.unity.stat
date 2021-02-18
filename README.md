@@ -1,6 +1,6 @@
 # com.unity.stat
 
-This is a custom package of in Unity Engine for mobile profilling.
+This is a custom package of Unity Engine for mobile profilling.
 
 Using this package, you can realtimely check stats data directly in your device.
 
