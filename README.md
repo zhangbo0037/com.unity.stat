@@ -1,13 +1,22 @@
 # com.unity.stat
+This is a custom package of in Unity Engine for mobile profilling.
+Using this package, you can realtimely check stats data directly in your device.
 
-Create a unity package named "com.unity.stat"
-Using this package can display stats directly in test mobile.
+## Environment
+Unity version: 2019.4.19f1
+
+## Install package
+1. Go to the Package Manager 
+2. Click "Add Package from git URL..." within "+".
+3. Paste "https://github.com/zhangbo0037/com.unity.stat.git" and Click Add button.
+
+## After Installing
+For now, you can check the "performance" and "memory" as below shown. 
+
+
 
 ## Notices
-
-1. The master branch is using 2019.4.19f1 version of unity.
-2. The first commit date of this repository is 02/11/2020.
+The first commit date of this repository is 02/11/2020.
 
 ## Others
-
-E-mail:
+E-mail: zhangbo0037@gmail.com
