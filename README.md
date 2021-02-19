@@ -1,6 +1,6 @@
 # com.unity.stat
 
-This is a custom package for mobile profilling based in Universal RP.
+This is a custom package for mobile profilling based in Universal Render Pipeline (URP).
 
 Using this package, you can realtimely check stats data directly in your device.
 
