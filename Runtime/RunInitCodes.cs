@@ -6,7 +6,7 @@ class RunInitCodes : MonoBehaviour
 {
     static Object obCanvas;
     static GameObject gameObj;
-    
+
     [RuntimeInitializeOnLoadMethod]
     static void OnRuntimeMethodLoad() // Initial UI system
     {

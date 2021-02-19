@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class Toggle_ActivateStats : MonoBehaviour
 {
     public GameObject buttonReturn;
     public GameObject panelMainMenu;
+
     public GameObject panelPerformance;
     public GameObject panelMemory;
+    public GameObject panelDepthTexture;
+    public GameObject panelOpaqueTexture;
 
     void Awake()
     {
@@ -17,15 +19,16 @@ public class Toggle_ActivateStats : MonoBehaviour
             //QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 120;
         }
+
+        //if (Camera.main.GetComponent<Camera>().depthTextureMode == DepthTextureMode.None)
+        //{
+        //    Camera.main.GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
+        //}
     }
 
     void OnEnable()
-    {
-        // Initialization
-        buttonReturn.SetActive(false);
-        panelMainMenu.SetActive(false);
-        panelPerformance.SetActive(false);
-        panelMemory.SetActive(false);
+    {   
+        SetAllUI2False(); // Initialization
     }
 
     public void OnTriggerEnter_ActivateStats(bool activated)
@@ -36,10 +39,17 @@ public class Toggle_ActivateStats : MonoBehaviour
         }
         else
         {
-            panelMainMenu.SetActive(false);
-            panelPerformance.SetActive(false);
-            panelMemory.SetActive(false);
-            buttonReturn.SetActive(false);
+            SetAllUI2False();
         }
+    }
+
+    private void SetAllUI2False()
+    {
+        buttonReturn.SetActive(false);
+        panelMainMenu.SetActive(false);
+        panelPerformance.SetActive(false);
+        panelMemory.SetActive(false);
+        panelDepthTexture.SetActive(false);
+        panelOpaqueTexture.SetActive(false);
     }
 }

@@ -9,15 +9,24 @@ public class Button_ReturnToMainMenu : MonoBehaviour
 {
     public GameObject buttonReturn;
     public GameObject panelMainMenu;
+
     public GameObject panelPerformance;
     public GameObject panelMemory;
+    public GameObject panelDepthTexture;
+    public GameObject panelOpaqueTexture;
 
     public void OnButton_ReturnToMainMenu()
     {
-        buttonReturn.SetActive(false);
+        panelMainMenu.SetActive(true);
+        SetUI2FalseExceptMainMenu();
+    }
 
+    private void SetUI2FalseExceptMainMenu()
+    {
+        buttonReturn.SetActive(false);
         panelPerformance.SetActive(false);
         panelMemory.SetActive(false);
-        panelMainMenu.SetActive(true);
+        panelDepthTexture.SetActive(false);
+        panelOpaqueTexture.SetActive(false);
     }
 }
