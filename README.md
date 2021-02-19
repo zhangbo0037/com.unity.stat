@@ -2,7 +2,7 @@
 
 This is a custom package for mobile profilling based in Universal Render Pipeline (URP).
 
-Using this package, you can realtimely check stats data directly in your device.
+Using this package, you can directly check stats data in your device.
 
 For now, you can check the "performance", "memory", "DepthTexture" and "OpaqueTexture" as below shown.
 
