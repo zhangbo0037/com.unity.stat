@@ -18,8 +18,9 @@ public class Texts_Memory : MonoBehaviour
 
     public Text totalTextureMemory;
     public Text totalMeshMemory;
-    public Text totalMaterialMemory;
-    public Text totalObjectMemory;
+
+    public Text totalMaterialCount;
+    public Text totalObjectCount;
 
     //public Text allocatedMemoryGraphicsDriver;
 
@@ -56,29 +57,25 @@ public class Texts_Memory : MonoBehaviour
         tmpAllocator.text = (Profiler.GetTempAllocatorSize() * byte2MB) + " MB";
 
         // 7. Gathers the native-memory used by a Unity object.
-        sum = 0; // Texture
+        sum = 0; // Texture Memory
         objs = Resources.FindObjectsOfTypeAll(typeof(Texture));
         foreach (var tex in objs)
             sum += Profiler.GetRuntimeMemorySizeLong((Texture)tex);
         totalTextureMemory.text = (sum * byte2MB) + " MB";
 
-        sum = 0; // Mesh
+        sum = 0; // Mesh Memory
         objs = Resources.FindObjectsOfTypeAll(typeof(Mesh));
         foreach (var mes in objs)
             sum += Profiler.GetRuntimeMemorySizeLong((Mesh)mes);
         totalMeshMemory.text = (sum * byte2MB) + " MB";
 
-        sum = 0; // Material
+        // Material count
         objs = Resources.FindObjectsOfTypeAll(typeof(Material));
-        foreach (var mat in objs)
-            sum += Profiler.GetRuntimeMemorySizeLong((Material)mat);
-        totalMaterialMemory.text = (sum * byte2MB) + " MB";
+        totalMaterialCount.text = objs.Length + "";
 
-        sum = 0; // Object
+        // Object count
         objs = Resources.FindObjectsOfTypeAll(typeof(Object));
-        foreach (var obj in objs)
-            sum += Profiler.GetRuntimeMemorySizeLong((Object)obj);
-        totalObjectMemory.text = (sum * byte2MB) + " MB";
+        totalObjectCount.text = objs.Length + "";
 
         // X. Returns the amount of allocated memory for the graphics driver, in bytes.
         // Only available in development players and editor.

@@ -685,7 +685,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Total Material Memory
+  m_Text: Total Material Count
 --- !u!1 &3126215635292048320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1231,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Total Object Memory
+  m_Text: Total Object Count
 --- !u!1 &5512070017665739904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3793,10 +3793,10 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.01
-  m_Inertia: 1
+  m_Elasticity: 2.5
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 5
+  m_ScrollSensitivity: 2.5
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -4491,10 +4491,10 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.01
-  m_Inertia: 1
+  m_Elasticity: 2.5
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 5
+  m_ScrollSensitivity: 2.5
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -5065,10 +5065,10 @@ MonoBehaviour:
   m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
-  m_Elasticity: 0.01
-  m_Inertia: 1
+  m_Elasticity: 2.5
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 5
+  m_ScrollSensitivity: 2.5
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -5380,8 +5380,8 @@ MonoBehaviour:
   allocatedManagedMemory: {fileID: 8946000620117809844}
   totalTextureMemory: {fileID: 7690679502733683960}
   totalMeshMemory: {fileID: 6286666442836168967}
-  totalMaterialMemory: {fileID: 4206192727139338890}
-  totalObjectMemory: {fileID: 387438989789680181}
+  totalMaterialCount: {fileID: 4206192727139338890}
+  totalObjectCount: {fileID: 387438989789680181}
 --- !u!1 &7210990800716201817
 GameObject:
   m_ObjectHideFlags: 0
