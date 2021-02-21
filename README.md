@@ -5,10 +5,10 @@ This is a custom package for mobile profilling based in Universal Render Pipelin
 Using this package, you can directly check stats data in your device.
 
 For now, you can check:
-1. performance
-2. memory
+1. Performance
+2. Memory
 3. Depth Texture (Main Camera Space)
-4. Opaque Texture(Main Camera Space)
+4. Opaque Texture (Main Camera Space)
 5. Shadow Map Texture (Main Light Space)
 
 PS. Do not forget check related options on URP assets, Before profiling DepthTexture and OpaqueTexture.
