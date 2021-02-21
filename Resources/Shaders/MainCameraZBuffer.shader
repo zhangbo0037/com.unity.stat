@@ -3,7 +3,6 @@
 	Properties
 	{
 		//[HideInInspector] _MainTex( "Screen", 2D ) = "black" {}
-		//[HideInInspector] _CameraDepthTexture("Depth Texture", 2D) = "white" {}
 	}
 	SubShader
 	{
@@ -42,12 +41,20 @@
 				o.uv = v.uv;
 				return o;
 			}
-			
+
+			float LinearizeDepth(float z, float n, float f)
+			{
+				return (2.0 * n) / (f + n - z * (f - n));
+			}
+
 			fixed4 frag(v2f i) : SV_Target
 			{
+				//const float n = 0.3; // camera z near
+				//const float f = 1000.0; // camera z far
 				float depth = tex2D(_CameraDepthTexture, i.uv).r; //get depth from depth texture
-				//depth = Linear01Depth(depth); //linear depth between camera and far clipping plane
-				//depth = depth * _ProjectionParams.z; //depth as distance from camera in units
+				depth = 1.0 - depth;
+				//depth = LinearizeDepth(depth, n, f);
+				depth = pow(depth, 2.0 * 2.71828); // Just for better visualization 
 				return fixed4(depth, depth, depth, 1);
 			}
 			ENDCG

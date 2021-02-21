@@ -6,11 +6,11 @@ public class Toggle_ActivateStats : MonoBehaviour
 {
     public GameObject buttonReturn;
     public GameObject panelMainMenu;
-
     public GameObject panelPerformance;
     public GameObject panelMemory;
     public GameObject panelDepthTexture;
     public GameObject panelOpaqueTexture;
+    public GameObject panelShadowMapTexture;
 
     void Awake()
     {
@@ -51,5 +51,6 @@ public class Toggle_ActivateStats : MonoBehaviour
         panelMemory.SetActive(false);
         panelDepthTexture.SetActive(false);
         panelOpaqueTexture.SetActive(false);
+        panelShadowMapTexture.SetActive(false);
     }
 }

@@ -9,11 +9,11 @@ public class Button_ReturnToMainMenu : MonoBehaviour
 {
     public GameObject buttonReturn;
     public GameObject panelMainMenu;
-
     public GameObject panelPerformance;
     public GameObject panelMemory;
     public GameObject panelDepthTexture;
     public GameObject panelOpaqueTexture;
+    public GameObject panelShadowMapTexture;
 
     public void OnButton_ReturnToMainMenu()
     {
@@ -28,5 +28,6 @@ public class Button_ReturnToMainMenu : MonoBehaviour
         panelMemory.SetActive(false);
         panelDepthTexture.SetActive(false);
         panelOpaqueTexture.SetActive(false);
+        panelShadowMapTexture.SetActive(false);
     }
 }

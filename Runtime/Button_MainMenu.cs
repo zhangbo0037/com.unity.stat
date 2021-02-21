@@ -6,11 +6,11 @@ public class Button_MainMenu : MonoBehaviour
 {
     public GameObject buttonReturn;
     public GameObject panelMainMenu;
-
     public GameObject panelPerformance;
     public GameObject panelMemory;
     public GameObject panelDepthTexture;
     public GameObject panelOpaqueTexture;
+    public GameObject panelShadowMapTexture;
 
     public void OnButton_Performance()
     {
@@ -30,6 +30,11 @@ public class Button_MainMenu : MonoBehaviour
     public void OnButton_OpaqueTexture()
     {
         SetUIStates(panelOpaqueTexture);
+    }
+
+    public void OnButton_ShadowMapTexture()
+    {
+        SetUIStates(panelShadowMapTexture);
     }
 
     private void SetUIStates(GameObject inputGO)
