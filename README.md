@@ -35,7 +35,7 @@ The latest update on 02/20/2020.
 
 
 ## Others
-E-mail: zhangbo0037@gmail.com
+
 
 
 ## Screenshots
