@@ -55,8 +55,7 @@
 			{
 				i.uv.x /= 2.0; // We just display the shadow map of mipmap level 0
 				float depth = tex2D(_MainLightShadowmapTexture, i.uv); //get depth from depth texture
-				depth = 1.0 - depth;
-				return depth;
+				return 1.0 - depth;
 			}
 			ENDCG
 		}
