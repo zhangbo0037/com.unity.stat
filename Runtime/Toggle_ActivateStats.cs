@@ -2,55 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Toggle_ActivateStats : MonoBehaviour
+namespace StatProject
 {
-    public GameObject buttonReturn;
-    public GameObject panelMainMenu;
-    public GameObject panelPerformance;
-    public GameObject panelMemory;
-    public GameObject panelDepthTexture;
-    public GameObject panelOpaqueTexture;
-    public GameObject panelShadowMapTexture;
-
-    void Awake()
+    public class Toggle_ActivateStats : MonoBehaviour
     {
-        if (Application.isMobilePlatform)
+        public GameObject buttonReturn;
+        public GameObject panelMainMenu;
+        public GameObject panelPerformance;
+        public GameObject panelMemory;
+        public GameObject panelDepthTexture;
+        public GameObject panelOpaqueTexture;
+        public GameObject panelShadowMapTexture;
+
+        void Awake()
         {
-            //QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = 120;
+            if (Application.isMobilePlatform)
+            {
+                //QualitySettings.vSyncCount = 0;
+                Application.targetFrameRate = 120;
+            }
+
+            //if (Camera.main.GetComponent<Camera>().depthTextureMode == DepthTextureMode.None)
+            //{
+            //    Camera.main.GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
+            //}
         }
 
-        //if (Camera.main.GetComponent<Camera>().depthTextureMode == DepthTextureMode.None)
-        //{
-        //    Camera.main.GetComponent<Camera>().depthTextureMode = DepthTextureMode.Depth;
-        //}
-    }
-
-    void OnEnable()
-    {   
-        SetAllUI2False(); // Initialization
-    }
-
-    public void OnTriggerEnter_ActivateStats(bool activated)
-    {
-        if(activated)
+        void OnEnable()
         {
-            panelMainMenu.SetActive(true);
+            SetAllUI2False(); // Initialization
         }
-        else
-        {
-            SetAllUI2False();
-        }
-    }
 
-    private void SetAllUI2False()
-    {
-        buttonReturn.SetActive(false);
-        panelMainMenu.SetActive(false);
-        panelPerformance.SetActive(false);
-        panelMemory.SetActive(false);
-        panelDepthTexture.SetActive(false);
-        panelOpaqueTexture.SetActive(false);
-        panelShadowMapTexture.SetActive(false);
+        public void OnTriggerEnter_ActivateStats(bool activated)
+        {
+            if (activated)
+            {
+                panelMainMenu.SetActive(true);
+            }
+            else
+            {
+                SetAllUI2False();
+            }
+        }
+
+        private void SetAllUI2False()
+        {
+            buttonReturn.SetActive(false);
+            panelMainMenu.SetActive(false);
+            panelPerformance.SetActive(false);
+            panelMemory.SetActive(false);
+            panelDepthTexture.SetActive(false);
+            panelOpaqueTexture.SetActive(false);
+            panelShadowMapTexture.SetActive(false);
+        }
     }
 }

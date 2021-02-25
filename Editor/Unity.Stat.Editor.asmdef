@@ -1,8 +1,6 @@
 {
     "name": "Unity.Stat.Editor",
-    "references": [
-        "GUID:00e9e8683afd840ef86607520d7e4ee7"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
