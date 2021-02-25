@@ -16,7 +16,6 @@ namespace StatProject
     static void OnRuntimeMethodLoad() // Initial UI system
     {
         obCanvas = Resources.Load("Prefabs/Stats", typeof(GameObject));
-
         if(obCanvas)
         {
             gameObj = Instantiate(obCanvas) as GameObject;
