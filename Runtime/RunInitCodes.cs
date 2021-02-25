@@ -16,7 +16,15 @@ namespace StatProject
     static void OnRuntimeMethodLoad() // Initial UI system
     {
         obCanvas = Resources.Load("Prefabs/Stats", typeof(GameObject));
-        gameObj = Instantiate(obCanvas) as GameObject;
+
+        if(obCanvas)
+        {
+            gameObj = Instantiate(obCanvas) as GameObject;
+        }
+        else
+        {
+            Debug.LogError("Can not load UI Prefabs! Please check Script file 'RunInitCodes.cs' to fix it");
+        }
     }
 
     // Client.Remove("com.unity.stat");
