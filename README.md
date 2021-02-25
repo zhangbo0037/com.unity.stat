@@ -29,9 +29,9 @@ URP version: 7.5.2
 
 
 ## Notices
-The first commit of this repository on 02/11/2020.
-
-The latest update on 02/20/2020.
+1. Only Development Builds, and the Editor can use the Memory Profiler. This limitation means that you can’t profile release builds. The Unity Profiler has the same limitation.
+2. The first commit of this repository on 02/11/2020.
+3. The latest update on 02/25/2020.
 
 
 ## Others
