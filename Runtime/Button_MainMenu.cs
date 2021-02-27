@@ -10,6 +10,7 @@ namespace StatProject
         public GameObject panelMainMenu;
         public GameObject panelPerformance;
         public GameObject panelMemory;
+        public GameObject panelMemoryGraph;
         public GameObject panelDepthTexture;
         public GameObject panelOpaqueTexture;
         public GameObject panelShadowMapTexture;
@@ -22,6 +23,12 @@ namespace StatProject
         public void OnButton_Memory()
         {
             SetUIStates(panelMemory);
+        }
+
+        public void OnButton_MemoryGraph()
+        {
+            SetUIStates(panelMemory);
+            SetUIStates(panelMemoryGraph);
         }
 
         public void OnButton_DepthTexture()

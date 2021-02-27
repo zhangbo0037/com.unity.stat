@@ -13,6 +13,7 @@ namespace StatProject
         public GameObject panelMainMenu;
         public GameObject panelPerformance;
         public GameObject panelMemory;
+        public GameObject panelMemoryGraph;
         public GameObject panelDepthTexture;
         public GameObject panelOpaqueTexture;
         public GameObject panelShadowMapTexture;
@@ -28,6 +29,7 @@ namespace StatProject
             buttonReturn.SetActive(false);
             panelPerformance.SetActive(false);
             panelMemory.SetActive(false);
+            panelMemoryGraph.SetActive(false);
             panelDepthTexture.SetActive(false);
             panelOpaqueTexture.SetActive(false);
             panelShadowMapTexture.SetActive(false);

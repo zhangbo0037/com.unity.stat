@@ -9,6 +9,10 @@ namespace StatProject
 {
     public class Texts_Memory : MonoBehaviour
     {
+        public static float gTotalReservedMemory;
+        public static float gTexture2DMemory;
+        public static float gTotalGCAlloc, gGCAlloc;
+
         public Text totalReservedMemory;
         public Text allocatedMemory;
         public Text reservedButNotAllocated;
@@ -26,11 +30,11 @@ namespace StatProject
 
         public Text allocatedMemoryGraphicsDriver;
 
-        private long sum;
-        private UnityEngine.Object[] objs;
-
         private const float byte2KB = 1.0f / 1024.0f;
         private const float byteToMB = byte2KB / 1024.0f;
+
+        private long sum;
+        private UnityEngine.Object[] objs;
 
         void FixedUpdate()
         {
@@ -38,7 +42,8 @@ namespace StatProject
             // https://docs.unity3d.com/ScriptReference/Profiling.Profiler.html
 
             // 1. The total memory Unity has reserved.
-            totalReservedMemory.text = (Profiler.GetTotalReservedMemoryLong() * byteToMB) + " MB";
+            gTotalReservedMemory = Profiler.GetTotalReservedMemoryLong() * byteToMB;
+            totalReservedMemory.text = gTotalReservedMemory + " MB";
 
             // 2. The total memory allocated by the internal allocators in Unity.
             // Unity reserves large pools of memory from the system.
@@ -49,11 +54,13 @@ namespace StatProject
             // This function returns the amount of unused memory in these pools.
             reservedButNotAllocated.text = (Profiler.GetTotalUnusedReservedMemoryLong() * byteToMB) + " MB";
 
-            // 4. Returns the size of the reserved space for managed-memory.
-            reservedManagedMemory.text = (Profiler.GetMonoHeapSizeLong() * byteToMB) + " MB";
+            // 4. Returns the size of the reserved space for managed-memory.(Total GC Allocated)
+            gTotalGCAlloc = Profiler.GetMonoHeapSizeLong() * byteToMB;
+            reservedManagedMemory.text = gTotalGCAlloc + " MB";
 
-            // 5. The allocated managed-memory for live objects and non-collected objects.
-            allocatedManagedMemory.text = (Profiler.GetMonoUsedSizeLong() * byteToMB) + " MB";
+            // 5. The allocated managed-memory for live objects and non-collected objects. (GC Allocated)
+            gGCAlloc = Profiler.GetMonoUsedSizeLong() * byteToMB;
+            allocatedManagedMemory.text = gGCAlloc + " MB";
 
             // 6. Returns the size of the temp allocator.
             tmpAllocator.text = (Profiler.GetTempAllocatorSize() * byteToMB) + " MB";
@@ -63,9 +70,12 @@ namespace StatProject
             // Texture Memory
             sum = 0;
             objs = Resources.FindObjectsOfTypeAll(typeof(Texture));
+
             foreach (var tex in objs)
                 sum += Profiler.GetRuntimeMemorySizeLong((Texture)tex);
-            totalTextureMemory.text = (sum * byteToMB) + " MB";
+
+            gTexture2DMemory = sum * byteToMB;
+            totalTextureMemory.text = gTexture2DMemory + " MB";
 
             // Mesh Memory
             sum = 0;
