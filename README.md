@@ -7,9 +7,10 @@ Using this package, you can directly check stats data in your device.
 For now, you can check:
 1. Performance
 2. Memory
-3. Depth Texture (Main Camera Space)
-4. Opaque Texture (Main Camera Space)
-5. Shadow Map Texture (Main Light Space)
+3. Memory Graph
+4. Depth Texture (Main Camera Space)
+5. Opaque Texture (Main Camera Space)
+6. Shadow Map Texture (Main Light Space)
 
 PS. Do not forget check related options on URP assets, Before profiling DepthTexture and OpaqueTexture.
 
