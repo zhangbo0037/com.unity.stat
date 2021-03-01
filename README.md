@@ -47,6 +47,8 @@ URP version: 7.5.2
 
 ![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/Memory.png?raw=true "Memory")
 
+![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/MemoryGraph.png?raw=true "Memory Graph")
+
 ![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/DepthTexture.png?raw=true "Depth Texture") 
 
 ![Alt text](https://github.com/zhangbo0037/com.unity.stat/blob/master/ReadmeImages/OpaqueTexture.png?raw=true "Opaque Texture")
