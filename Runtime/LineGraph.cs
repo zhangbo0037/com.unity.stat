@@ -69,7 +69,7 @@ namespace StatProject
             DrawGraph(queue_texture2D, str_texture2D, color_texture2D, Texts_Memory.gTexture2DMemory);
             DrawText(str_texture2D, color_texture2D, Texts_Memory.gTexture2DMemory);
 
-            // 6. Draw Mesh
+            // 6. Draw Mesh Graph
             DrawGraph(queue_mesh, str_mesh, color_mesh, Texts_Memory.gMeshMemory);
             DrawText(str_mesh, color_mesh, Texts_Memory.gMeshMemory);
 
@@ -171,7 +171,7 @@ namespace StatProject
             if (queue.Count == (int)maxNumAxisX)
             {
                 index = 0; // Reset index
-                DestroyImmediate(GameObject.Find(queue.Dequeue().name)); // Dequeue first element and destroy the gameObject
+                Destroy(GameObject.Find(queue.Dequeue().name)); // Dequeue first element and destroy the gameObject
             }
         }
 
