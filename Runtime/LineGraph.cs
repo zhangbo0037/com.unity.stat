@@ -8,9 +8,9 @@ namespace StatProject
     public class LineGraph : MonoBehaviour
     {
         private static int index = 0;
+        public static float raised = 0.992f;
 
         private const float dx = 0.15f;
-        private const float raised = 0.995f;
         private const int maxNumAxisX = 5;
 
         private const string str_totalReserved = "Total Reserved Memory";
@@ -105,7 +105,7 @@ namespace StatProject
             rectTrans.sizeDelta = new Vector2(200.0f, 100.0f);
 
             float axisY = GetAxisYCoord(memorySize);
-            rectTrans.anchorMin = rectTrans.anchorMax = new Vector2(0.9f, axisY);
+            rectTrans.anchorMin = rectTrans.anchorMax = new Vector2(0.85f, axisY);
 
             Text mtext = gameObject.AddComponent<Text>();
             mtext.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
