@@ -1681,7 +1681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Temp Allocator Size
+  m_Text: Temp Allocator Memory
 --- !u!1 &4745509123303680506
 GameObject:
   m_ObjectHideFlags: 0
@@ -6072,14 +6072,14 @@ MonoBehaviour:
   totalReservedMemory: {fileID: 5689999615119124925}
   allocatedMemory: {fileID: 1611919482252483340}
   reservedButNotAllocated: {fileID: 5522773701874981087}
-  tmpAllocator: {fileID: 2247049979145270637}
   reservedManagedMemory: {fileID: 4595198417072816125}
   allocatedManagedMemory: {fileID: 8946000620117809844}
   totalTextureMemory: {fileID: 7690679502733683960}
   totalMeshMemory: {fileID: 6286666442836168967}
+  tmpAllocator: {fileID: 2247049979145270637}
+  allocatedGfxDriver: {fileID: 8755826380697166475}
   totalMaterialCount: {fileID: 4206192727139338890}
   totalObjectCount: {fileID: 387438989789680181}
-  allocatedMemoryGraphicsDriver: {fileID: 8755826380697166475}
 --- !u!1 &7210990800716201817
 GameObject:
   m_ObjectHideFlags: 0

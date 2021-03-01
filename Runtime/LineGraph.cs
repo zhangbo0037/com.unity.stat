@@ -7,33 +7,38 @@ namespace StatProject
 {
     public class LineGraph : MonoBehaviour
     {
-        private const float dx = 0.15f;
-        private const int maxNumAxisX = 5;
-
-        private const float offsetY = 20.0f;
-        private float maxCoordY;
-
         private static int index = 0;
 
-        private const string str_totalMemory = "totalMemory";
-        private const string str_totalGCAlloc = "totalGCAlloc";
-        private const string str_gcAlloc = "gcAlloc";
-        private const string str_Texture2D = "Texture2D";
+        private const float dx = 0.15f;
+        private const float raised = 0.995f;
+        private const int maxNumAxisX = 5;
 
-        private const string str_text_totalMemory = "Total Reserved memory";
-        private const string str_text_totalGCAlloc = "Total GC Allocated";
-        private const string str_text_gcAlloc = "GC Allocated";
-        private const string str_text_Texture2D = "Texture2D Memory";
+        private const string str_totalReserved = "Total Reserved Memory";
+        private const string str_totalAllocated = "Total Allocated Memory";
+        private const string str_tmpAllocator = "Tmp Allocator Memory";
+        private const string str_allocatedGfxDriver = "Allocated for GfxDriver";
+        private const string str_texture2D = "Total Texture2D Memory";
+        private const string str_mesh = "Total Mesh Memory";
+        private const string str_totalGCAlloc = "Total GC Allocated";
+        private const string str_gcAlloc = "GC Allocated";
 
-        private static Queue<GameObject> Queue_totalMemory = new Queue<GameObject>();
-        private static Queue<GameObject> Queue_totalGCAlloc = new Queue<GameObject>();
-        private static Queue<GameObject> Queue_gcAlloc = new Queue<GameObject>();
-        private static Queue<GameObject> Queue_Texture2D = new Queue<GameObject>();
+        private static Queue<GameObject> queue_totalReserved = new Queue<GameObject>();
+        private static Queue<GameObject> queue_totalAllocated = new Queue<GameObject>();
+        private static Queue<GameObject> queue_tmpAllocator = new Queue<GameObject>();
+        private static Queue<GameObject> queue_allocatedGfxDriver = new Queue<GameObject>();
+        private static Queue<GameObject> queue_texture2D = new Queue<GameObject>();
+        private static Queue<GameObject> queue_mesh = new Queue<GameObject>();
+        private static Queue<GameObject> queue_totalGCAlloc = new Queue<GameObject>();
+        private static Queue<GameObject> queue_gcAlloc = new Queue<GameObject>();
 
-        private Color color_totalMemory = new Vector4(0.48235294117f, 0.61960784313f, 0.01960784313f, 1.0f); // dark green
-        private Color color_totalGCAlloc = new Vector4(0.55294117647f, 0.47058823529f, 0.09019607843f, 1.0f); // dark Yellow
-        private Color color_Texture2D = new Vector4(0.20392156862f, 0.53333333333f, 0.65490196078f, 1.0f); // dark blue
-        private Color color_gcAlloc = new Vector4(1, 0, 0, 1); // Red
+        private Color color_totalReserved = new Vector4(0.0f, 1.0f, 0.0f, 1.0f); // green
+        private Color color_totalAllocated = new Vector4(0.482352f, 0.619607f, 0.019607f, 1.0f); // dark green
+        private Color color_tmpAllocator = new Vector4(1.0f, 0.0f, 1.0f, 1.0f); // Purple
+        private Color color_allocatedGfxDriver = new Vector4(0.0f, 1.0f, 1.0f, 1.0f); // yan
+        private Color color_totalGCAlloc = new Vector4(1.0f, 1.0f, 0.0f, 1.0f); // Yello
+        private Color color_gcAlloc = new Vector4(0.552941f, 0.470588f, 0.090196f, 1.0f); // dark Yellow
+        private Color color_texture2D = new Vector4(0.203921f, 0.533333f, 0.654901f, 1.0f); // dark blue
+        private Color color_mesh = new Vector4(1.0f, 0.549019f, 0.0f, 1.0f); // Orange
 
         private RectTransform graphContainer;
 
@@ -44,52 +49,104 @@ namespace StatProject
 
         private void FixedUpdate()
         {
-            maxCoordY = Texts_Memory.gTotalReservedMemory + offsetY;
+            // 1. Draw Total Reserved Memory Graph
+            DrawGraph(queue_totalReserved, str_totalReserved, color_totalReserved, Texts_Memory.gTotalReservedMemory);
+            DrawText(str_totalReserved, color_totalReserved, Texts_Memory.gTotalReservedMemory);
 
-            // Draw Total Reserved Memory Graph
-            DrawGraph(Queue_totalMemory, str_totalMemory, color_totalMemory, Texts_Memory.gTotalReservedMemory, maxCoordY);
+            // 2. Draw Total Allocated Memory Graph
+            DrawGraph(queue_totalAllocated, str_totalAllocated, color_totalAllocated, Texts_Memory.gTotalAllocatedMemory);
+            DrawText(str_totalAllocated, color_totalAllocated, Texts_Memory.gTotalAllocatedMemory);
 
-            // Draw Total GC Allocated Graph
-            DrawGraph(Queue_totalGCAlloc, str_totalGCAlloc, color_totalGCAlloc, Texts_Memory.gTotalGCAlloc, maxCoordY);
+            // 3. Draw Tmp Allocator Graph
+            DrawGraph(queue_tmpAllocator, str_tmpAllocator, color_tmpAllocator, Texts_Memory.gtmpAllocator);
+            DrawText(str_tmpAllocator, color_tmpAllocator, Texts_Memory.gtmpAllocator);
 
-            // Draw GC Allocated Graph
-            DrawGraph(Queue_gcAlloc, str_gcAlloc, color_gcAlloc, Texts_Memory.gGCAlloc, maxCoordY);
+            // 4. Draw Allocated GfxDriver Graph
+            DrawGraph(queue_allocatedGfxDriver, str_allocatedGfxDriver, color_allocatedGfxDriver, Texts_Memory.gAllocatedGfxDriver);
+            DrawText(str_allocatedGfxDriver, color_allocatedGfxDriver, Texts_Memory.gAllocatedGfxDriver);
 
-            // Draw Texture 2D Graph
-            DrawGraph(Queue_Texture2D, str_Texture2D, color_Texture2D, Texts_Memory.gTexture2DMemory, maxCoordY);
+            // 5. Draw Texture 2D Graph
+            DrawGraph(queue_texture2D, str_texture2D, color_texture2D, Texts_Memory.gTexture2DMemory);
+            DrawText(str_texture2D, color_texture2D, Texts_Memory.gTexture2DMemory);
 
-            //-------------------------------------
-            // Draw Total Reserved Memory Text
-            DrawText(str_text_totalMemory, color_totalMemory, Texts_Memory.gTotalReservedMemory, maxCoordY);
+            // 6. Draw Mesh
+            DrawGraph(queue_mesh, str_mesh, color_mesh, Texts_Memory.gMeshMemory);
+            DrawText(str_mesh, color_mesh, Texts_Memory.gMeshMemory);
 
-            // Draw Total GC Allocated Text
-            DrawText(str_text_totalGCAlloc, color_totalGCAlloc, Texts_Memory.gTotalGCAlloc, maxCoordY - 100.0f);
+            // 7. Draw Total Allocated GC Graph
+            DrawGraph(queue_totalGCAlloc, str_totalGCAlloc, color_totalGCAlloc, Texts_Memory.gTotalGCAlloc);
+            DrawText(str_totalGCAlloc, color_totalGCAlloc, Texts_Memory.gTotalGCAlloc);
 
-            // Draw GC Allocated Text
-            DrawText(str_text_gcAlloc, color_gcAlloc, Texts_Memory.gGCAlloc, maxCoordY);
-
-            // Draw Texture2D Text
-            DrawText(str_text_Texture2D, color_Texture2D, Texts_Memory.gTexture2DMemory, maxCoordY);
+            // 8. Draw Allocated GC  Graph
+            DrawGraph(queue_gcAlloc, str_gcAlloc, color_gcAlloc, Texts_Memory.gGCAlloc);
+            DrawText(str_gcAlloc, color_gcAlloc, Texts_Memory.gGCAlloc);
         }
 
-        public void DrawGraph(Queue<GameObject> queue, string name, Color color, float input, float maxCoordY)
+        //----------------------------------------
+        // Methods
+        //----------------------------------------
+        public void DrawGraph(Queue<GameObject> queue, string name, Color color, float memorySize)
         {
             DestroyGraph(queue, name);
-            MovingAllElements(queue);
-            AddNewElement(queue, name, color, input, maxCoordY);
+            MovingAllItems(queue);
+            AddNewItem(queue, name, color, memorySize);
             index++;
         }
 
-        public void DestroyGraph(Queue<GameObject> queue, string name)
+        public void DrawText(string name, Color color, float memorySize)
         {
-            if (queue.Count == (int)maxNumAxisX)
-            {
-                index = 0; // Reset index
-                DestroyImmediate(GameObject.Find(queue.Dequeue().name)); // Dequeue first element and destroy the gameObject
-            }
+            DestroyText(name);
+
+            GameObject gameObject = new GameObject(name);
+            gameObject.transform.SetParent(graphContainer, false);
+
+            RectTransform rectTrans = gameObject.AddComponent<RectTransform>();
+            rectTrans.pivot = new Vector2(0.5f, 0.5f);
+            rectTrans.sizeDelta = new Vector2(200.0f, 100.0f);
+
+            float axisY = GetAxisYCoord(memorySize);
+            rectTrans.anchorMin = rectTrans.anchorMax = new Vector2(0.9f, axisY);
+
+            Text mtext = gameObject.AddComponent<Text>();
+            mtext.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+            mtext.alignment = TextAnchor.MiddleCenter;
+            mtext.color = color;
+            mtext.text = name + ": \n" + memorySize + " MB";
         }
 
-        public void MovingAllElements(Queue<GameObject> queue)
+        public void AddNewItem(Queue<GameObject> queue, string name, Color color, float memorySize)
+        {
+            GameObject go = new GameObject(name + index.ToString(), typeof(Image));
+            go.transform.SetParent(graphContainer, false);
+            go.GetComponent<Image>().color = color;
+
+            RectTransform rtPre;
+            Vector2 posPre = new Vector2(0.0f, 0.0f);
+
+            if (queue.Count != 0)
+            {
+                rtPre = queue.Peek().GetComponent<RectTransform>();
+                posPre = new Vector2(rtPre.anchorMin.x, rtPre.anchorMin.y);
+            }
+
+            RectTransform rt = go.GetComponent<RectTransform>();
+            rt.pivot = new Vector2(0.0f, 0.0f);
+
+            // The new Item is still Draw in coordinate 0.0f in axis X.
+            float axisY = GetAxisYCoord(memorySize);
+            rt.anchorMin = rt.anchorMax = new Vector2(0.0f, axisY);
+
+            Vector2 posCur = new Vector2(rt.anchorMin.x, rt.anchorMin.y);
+            Vector2 dir = (posPre - posCur).normalized;
+            float dist = Vector2.Distance(posPre, posCur);
+
+            rt.localScale = new Vector3(0.525f / dist, 0.02f, 0.02f);
+            rt.localEulerAngles = new Vector3(0.0f, 0.0f, Mathf.Pow(Vector3.Angle(dir, new Vector2(1.0f, 0.0f)), 1.5f));
+
+            queue.Enqueue(go); // Add this game object
+        }
+
+        public void MovingAllItems(Queue<GameObject> queue)
         {
             foreach (var each in queue)
             {
@@ -109,58 +166,23 @@ namespace StatProject
             }
         }
 
-        public void AddNewElement(Queue<GameObject> queue, string name, Color color, float input, float maxCoordY)
+        public void DestroyGraph(Queue<GameObject> queue, string name)
         {
-            GameObject go = new GameObject(name + index.ToString(), typeof(Image));
-            go.transform.SetParent(graphContainer, false);
-            go.GetComponent<Image>().color = color;
-
-            RectTransform rtPre;
-            Vector2 posPre = new Vector2(0.0f, 0.0f);
-
-            if (queue.Count != 0)
+            if (queue.Count == (int)maxNumAxisX)
             {
-                rtPre = queue.Peek().GetComponent<RectTransform>();
-                posPre = new Vector2(rtPre.anchorMin.x, rtPre.anchorMin.y);
+                index = 0; // Reset index
+                DestroyImmediate(GameObject.Find(queue.Dequeue().name)); // Dequeue first element and destroy the gameObject
             }
-
-            RectTransform rt = go.GetComponent<RectTransform>();
-            rt.pivot = new Vector2(0.0f, 0.0f);
-            rt.anchorMin = rt.anchorMax = new Vector2(0.0f, input / maxCoordY);
-            
-            Vector2 posCur = new Vector2(rt.anchorMin.x, rt.anchorMin.y);
-            Vector2 dir = (posPre - posCur).normalized;
-            float dist = Vector2.Distance(posPre, posCur);
-
-            rt.localScale = new Vector3(0.6f / dist, 0.025f, 0.025f);
-            rt.localEulerAngles = new Vector3(0.0f, 0.0f, Vector3.Angle(dir, new Vector2(1.0f, 0.0f)));
-
-            queue.Enqueue(go); // Add this game object
-        }
-
-        public void DrawText(string name, Color color, float inputValue, float maxCoordY)
-        {
-            DestroyText(name);
-
-            GameObject gameObject = new GameObject(name);
-            gameObject.transform.SetParent(graphContainer, false);
-
-            RectTransform rectTrans = gameObject.AddComponent<RectTransform>();
-            rectTrans.pivot = new Vector2(0.5f, 0.5f);
-            rectTrans.sizeDelta = new Vector2(200.0f, 100.0f);
-            rectTrans.anchorMin = new Vector2(0.9f, inputValue / maxCoordY);
-            rectTrans.anchorMax = new Vector2(0.9f, inputValue / maxCoordY);
-
-            Text mtext = gameObject.AddComponent<Text>();
-            mtext.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-            mtext.alignment = TextAnchor.MiddleCenter;
-            mtext.color = color;
-            mtext.text = name + ": \n" + inputValue + " MB";
         }
 
         public void DestroyText(string name)
         {
             Destroy(GameObject.Find(name));
+        }
+
+        public float GetAxisYCoord(float power)
+        {
+            return 1.0f - Mathf.Pow(raised, power);
         }
     }
 
@@ -185,6 +207,29 @@ namespace StatProject
         {
             get { return this.y; }
             set { this.y = value; }
+        }
+    }
+
+    class MyQueue<T>
+    {
+        private readonly Queue<T> _inner = new Queue<T>();
+
+        public int Count
+        {
+            get { return _inner.Count; }
+        }
+
+        public T Last { get; private set; }
+
+        public void Enqueue(T item)
+        {
+            _inner.Enqueue(item);
+            Last = item; // < --- record the last item
+        }
+
+        public void Dequeue(T item)
+        {
+            _inner.Dequeue();
         }
     }
 }

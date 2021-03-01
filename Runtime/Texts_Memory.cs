@@ -9,32 +9,22 @@ namespace StatProject
 {
     public class Texts_Memory : MonoBehaviour
     {
-        public static float gTotalReservedMemory;
-        public static float gTexture2DMemory;
-        public static float gTotalGCAlloc, gGCAlloc;
-
-        public Text totalReservedMemory;
-        public Text allocatedMemory;
-        public Text reservedButNotAllocated;
-
-        public Text tmpAllocator;
-
-        public Text reservedManagedMemory;
-        public Text allocatedManagedMemory;
-
-        public Text totalTextureMemory;
-        public Text totalMeshMemory;
-
-        public Text totalMaterialCount;
-        public Text totalObjectCount;
-
-        public Text allocatedMemoryGraphicsDriver;
+        private long sum;
+        private UnityEngine.Object[] objs;
 
         private const float byte2KB = 1.0f / 1024.0f;
         private const float byteToMB = byte2KB / 1024.0f;
 
-        private long sum;
-        private UnityEngine.Object[] objs;
+        public static float gTotalReservedMemory, gTotalAllocatedMemory;
+        public static float gTotalGCAlloc, gGCAlloc;
+        public static float gTexture2DMemory, gMeshMemory;
+        public static float gtmpAllocator, gAllocatedGfxDriver;
+
+        public Text totalReservedMemory, allocatedMemory, reservedButNotAllocated;
+        public Text reservedManagedMemory, allocatedManagedMemory;
+        public Text totalTextureMemory, totalMeshMemory;
+        public Text tmpAllocator, allocatedGfxDriver;
+        public Text totalMaterialCount, totalObjectCount;
 
         void FixedUpdate()
         {
@@ -48,7 +38,8 @@ namespace StatProject
             // 2. The total memory allocated by the internal allocators in Unity.
             // Unity reserves large pools of memory from the system.
             // This function returns the amount of used memory in those pools.
-            allocatedMemory.text = (Profiler.GetTotalAllocatedMemoryLong() * byteToMB) + " MB";
+            gTotalAllocatedMemory = Profiler.GetTotalAllocatedMemoryLong() * byteToMB;
+            allocatedMemory.text = gTotalAllocatedMemory + " MB";
 
             // 3. Unity allocates memory in pools for usage when unity needs to allocate memory.
             // This function returns the amount of unused memory in these pools.
@@ -63,27 +54,25 @@ namespace StatProject
             allocatedManagedMemory.text = gGCAlloc + " MB";
 
             // 6. Returns the size of the temp allocator.
-            tmpAllocator.text = (Profiler.GetTempAllocatorSize() * byteToMB) + " MB";
+            gtmpAllocator = Profiler.GetTempAllocatorSize() * byteToMB;
+            tmpAllocator.text = gtmpAllocator + " MB";
 
-            // 7. Gathers the native-memory used by a Unity object.
-
+            // 7. Gathers memory by the type of object.
             // Texture Memory
             sum = 0;
             objs = Resources.FindObjectsOfTypeAll(typeof(Texture));
-
-            foreach (var tex in objs)
-                sum += Profiler.GetRuntimeMemorySizeLong((Texture)tex);
-
+            foreach (var tex in objs) { sum += Profiler.GetRuntimeMemorySizeLong((Texture)tex); }
             gTexture2DMemory = sum * byteToMB;
             totalTextureMemory.text = gTexture2DMemory + " MB";
 
             // Mesh Memory
             sum = 0;
             objs = Resources.FindObjectsOfTypeAll(typeof(Mesh));
-            foreach (var mes in objs)
-                sum += Profiler.GetRuntimeMemorySizeLong((Mesh)mes);
-            totalMeshMemory.text = (sum * byteToMB) + " MB";
+            foreach (var mes in objs) { sum += Profiler.GetRuntimeMemorySizeLong((Mesh)mes); }
+            gMeshMemory = sum * byteToMB;
+            totalMeshMemory.text = gMeshMemory + " MB";
 
+            // 8. Gathers count by the type of object.
             // Material count
             objs = Resources.FindObjectsOfTypeAll(typeof(Material));
             totalMaterialCount.text = objs.Length + "";
@@ -92,8 +81,9 @@ namespace StatProject
             objs = Resources.FindObjectsOfTypeAll(typeof(UnityEngine.Object));
             totalObjectCount.text = objs.Length + "";
 
-            // 8. Returns the amount of allocated memory for the graphics driver, in bytes. Only available in development players and editor.
-            allocatedMemoryGraphicsDriver.text = (Profiler.GetAllocatedMemoryForGraphicsDriver() * byteToMB) + " MB";
+            // 9. Returns the amount of allocated memory for the graphics driver, in bytes. Only available in development players and editor.
+            gAllocatedGfxDriver = Profiler.GetAllocatedMemoryForGraphicsDriver() * byteToMB;
+            allocatedGfxDriver.text = gAllocatedGfxDriver + " MB";
         }
 
         //private long GetTotalRuntimeMemorySizeByType<T>() where T : MonoBehaviour
